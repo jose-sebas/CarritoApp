@@ -1,13 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message';
+
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+
 import ProductList from './screens/ProductList';
 import ProductDetail from './screens/ProductDetail';
 import Cart from './screens/Cart';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 export type RootStackParamList = {
   ProductList: undefined;
@@ -48,6 +51,7 @@ export default function App() {
           <Stack.Screen name="Cart" component={Cart} />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </Provider> 
   );
 }

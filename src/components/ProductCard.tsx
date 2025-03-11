@@ -1,19 +1,35 @@
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
-import { Text, Image, TouchableOpacity } from 'react-native';
+import { Text, Image, TouchableOpacity, View } from 'react-native';
+import Toast from 'react-native-toast-message';
+
 import { RootStackParamList } from '../App';
+
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/reducers/cartSlice';
 
 const ProductCard = ({ product }: any) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList,'ProductList'>>();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    Toast.show({
+      type: 'success',
+      text1: 'Added to Cart',
+      text2: `${product.title} has been added!`,
+    });
+  };
+
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('ProductDetail', { product })}>
+    <TouchableOpacity style={{alignItems:'center', marginBottom:16}}  onPress={() => navigation.navigate('ProductDetail', { product })}>
       <Image source={{ uri: product.image }} style={{ width: 100, height: 100 }} />
       <Text>{product.title}</Text>
       <Text>{`$${product.price}`}</Text>
-      <TouchableOpacity>
-        <Text>Add to Cart</Text>
+      <TouchableOpacity style={{backgroundColor:'lightblue', borderRadius:8, padding:8}} onPress={handleAddToCart}>
+        <Text style={{textAlign:'center'}}>Add to Cart</Text>
       </TouchableOpacity>
     </TouchableOpacity>
   );
