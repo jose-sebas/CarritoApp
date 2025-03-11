@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, TextInput, View } from 'react-native';
+import { FlatList, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../redux/actions';
 import ProductCard from '../components/ProductCard';
@@ -30,7 +30,6 @@ const ProductList = () => {
         keyExtractor={(item) => item.id.toString()}
         style={{flex:1}}
       />
-      <Text>test</Text>
     </View>
   );
 };
