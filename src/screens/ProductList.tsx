@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, TextInput, View } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../redux/actions';
+import { fetchProductsRequest } from '../redux/reducers/productSlice';
 import ProductCard from '../components/ProductCard';
+import { RootState } from '../redux/store';
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state: any) => state.products);
+  const { products, loading, error } = useSelector((state: RootState) => state.products);
+
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProductsRequest());
   }, [dispatch]);
 
-  const filteredProducts = products.filter(product =>
-    product.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredProducts = useMemo(() => {
+    return products?.filter(product =>
+    product.title.toLowerCase().includes(search.toLowerCase()))
+  }, [products, search]);
+
+  if (loading) return <ActivityIndicator size="large" color="blue" />;
+  if (error) return <Text>Error loading products</Text>;
 
   return (
   <View style={{flex:1}}>
