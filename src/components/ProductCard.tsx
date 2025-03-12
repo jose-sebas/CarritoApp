@@ -26,9 +26,10 @@ const ProductCard = ({ product }: any) => {
   return (
     <TouchableOpacity style={{alignItems:'center', marginBottom:16}}  onPress={() => navigation.navigate('ProductDetail', { product })}>
       <Image source={{ uri: product.image }} style={{ width: 100, height: 100 }} />
-      <Text>{product.title}</Text>
+      <Text style={{width:'80%', textAlign:'center'}}>{product.title}</Text>
       <Text>{`$${product.price}`}</Text>
-      <TouchableOpacity style={{backgroundColor:'lightblue', borderRadius:8, padding:8}} onPress={handleAddToCart}>
+      <Text numberOfLines={1} style={{width:'80%', color:'grey', fontSize: 10}}>{product.description}</Text>
+      <TouchableOpacity style={{backgroundColor:'lightblue', borderRadius:8, padding:8, marginTop: 4}} onPress={handleAddToCart}>
         <Text style={{textAlign:'center'}}>Add to Cart</Text>
       </TouchableOpacity>
     </TouchableOpacity>
