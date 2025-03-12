@@ -8,3 +8,6 @@ Run the project using:
 `npm run web`
 
 `scan the QR code with your "expo" app`
+
+This is how it should look
+![Carrito app](./assets/CarritoApp.gif)
