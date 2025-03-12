@@ -34,6 +34,7 @@ const ProductList = () => {
         data={filteredProducts}
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={(item) => item.id.toString()}
+        ListEmptyComponent={<Text>No items found</Text>}
         style={{flex:1}}
       />
     </View>
